@@ -47,6 +47,18 @@ const songs=[
         img:"images/mental.jpg",
         music:"musics/mental.mp3"
     },
+    {
+        artistName: "Frank Ocean",
+        songName:"In My Room",
+        img:"images/frank.jpg",
+        music:"musics/frank.mp3"
+    },
+    {
+        artistName: "AZTEK",
+        songName:"Out Like A Light",
+        img:"images/aztek.jpg",
+        music:"musics/aztek.mp3"
+    },
 ];
 
 loadTrack(trackIndex);
