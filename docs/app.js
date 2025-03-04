@@ -72,7 +72,7 @@ function loadTrack(trackIndex){
     trackCover.src= songs[trackIndex].img;
     trackArtist.textContent= songs[trackIndex].artistName;
     trackTitle.textContent= songs[trackIndex].songName;
-    container.style.backgroundImage= "url("+songs[trackIndex].img+")";
+    //container.style.backgroundImage= "url("+songs[trackIndex].img+")";
     volume();
 };
 function next(){

@@ -4,22 +4,214 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Add font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <!-- Link to css -->
-    <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <!-- link to bootstrap icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="prefetch" as="script" href="https://cdn.jsdelivr.net/npm/tsparticles@1.39.0/tsparticles.pathseg.min.js">
     <title>S2.RIP</title>
     <link rel="icon" href="cav.ico"/>
+    <style>
+        /* Modern Windows 11 Dark Theme with Mica */
+        :root {
+            --bg-color: rgba(20, 20, 20, 0.2);       /* Darker and more transparent for blur */
+            --accent-color: #0066cc;                 /* Windows 11 blue accent */
+            --text-color: #ffffff;                   /* White text */
+            --secondary-text: #b3b3b3;              /* Light gray for secondary text */
+            --hover-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Archivo', sans-serif;
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(10px);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        #container {
+            background: var(--bg-color);
+            border-radius: 16px;
+            padding: 24px;
+            width: 400px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #img {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #track_cover {
+            width: 150px;
+            height: 150px;
+            border-radius: 12px;
+            object-fit: cover;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        #track_cover:hover {
+            transform: scale(1.05);
+        }
+
+        #title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #track_title {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        #track_artist {
+            color: var(--secondary-text);
+            font-size: 1rem;
+            margin: 4px 0 0 0;
+        }
+
+        #music_time {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        #track_current_time, #track_fulltime {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            outline: none;
+            transition: background 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .slider:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;                         /* Slightly larger */
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 2px solid #ffffff;           /* White border for contrast */
+            box-shadow: 0 0 10px rgba(0, 102, 204, 0.7), /* Glowing effect */
+                       0 0 20px rgba(0, 102, 204, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);               /* Slight scale-up on hover */
+            box-shadow: 0 0 15px rgba(0, 102, 204, 0.9), /* Enhanced glow */
+                       0 0 25px rgba(0, 102, 204, 0.5);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 10px rgba(0, 102, 204, 0.7),
+                       0 0 20px rgba(0, 102, 204, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .slider::-moz-range-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(0, 102, 204, 0.9),
+                       0 0 25px rgba(0, 102, 204, 0.5);
+        }
+
+        #music_functions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .function i {
+            color: var(--text-color);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .function i:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        #volume {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #volume i {
+            color: var(--text-color);
+            font-size: 1.2rem;
+        }
+
+        #links {
+            text-align: center;
+        }
+
+        #links a {
+            color: var(--secondary-text);
+            font-size: 1.2rem;
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+
+        #links a:hover {
+            color: var(--accent-color);
+        }
+
+        #tsparticles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.9);
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
     <div id="container"><br>
-        <!--h1>S2.RIP</h1-->
         <div id="img">
             <img id="track_cover" src="images/music.png" alt="disc" width="150">
         </div>
@@ -41,7 +233,6 @@
             </div>
             <div class="function">
                 <i id="next" onclick="next()" class="bi bi-skip-forward-circle"></i>
-
             </div>
         </div>
         <div id="volume">
@@ -50,84 +241,43 @@
             <i class="bi bi-volume-up"></i>
         </div>
         <div id="links">
-        <!--<a href="https://nxty.s2.rip"><i class="fa-solid fa-globe"></i></a> / --><a href="https://steamcommunity.com/id/2nxty/"><i class="fa-brands fa-steam"></i></a> / <a href="https://github.com/2nxty"><i class="fa-brands fa-github"></i></a>
+            <a href="https://steamcommunity.com/id/2nxty/"><i class="fa-brands fa-steam"></i></a>
+            <a href="https://github.com/2nxty"><i class="fa-brands fa-github"></i></a>
         </div>
     </div>
     <script src="app.js" charset="utf-8"></script>
     <script src="tsparticles.min.js"></script>
     <script>
         tsParticles.load("tsparticles", {
-        fpsLimit: 200,
-        interactivity: {
-            events: {
-            onClick: {
-                enable: false,
-                mode: "push"
+            fpsLimit: 200,
+            interactivity: {
+                events: {
+                    onClick: { enable: false, mode: "push" },
+                    onHover: { enable: true, mode: "repulse" },
+                    resize: true
+                },
+                modes: {
+                    bubble: { distance: 400, duration: 2, opacity: 0.8, size: 40 },
+                    push: { quantity: 4 },
+                    repulse: { distance: 200, duration: 0.4 }
+                }
             },
-            onHover: {
-                enable: true,
-                mode: "repulse"
+            particles: {
+                color: { value: "#127ce6" },
+                links: { color: "#0066cc", distance: 180, enable: true, opacity: 1, width: 1 },
+                collisions: { enable: true },
+                move: { direction: "none", enable: true, outMode: "bounce", random: false, speed: 5, straight: false },
+                number: { density: { enable: true, value_area: 800 }, value: 30 },
+                opacity: { value: 0.5 },
+                shape: { type: "circle" },
+                size: { random: true, value: 5 }
             },
-            resize: true
-            },
-            modes: {
-            bubble: {
-                distance: 400,
-                duration: 2,
-                opacity: 0.8,
-                size: 40
-            },
-            push: {
-                quantity: 4
-            },
-            repulse: {
-                distance: 200,
-                duration: 0.4
+            detectRetina: true,
+            background: {
+                color: "#0a0a0a"
             }
-            }
-        },
-        particles: {
-            color: {
-            value: "#582eff"
-            },
-            links: {
-            color: "#371da1",
-            distance: 180,
-            enable: true,
-            opacity: 1,
-            width: 1
-            },
-            collisions: {
-            enable: true
-            },
-            move: {
-            direction: "none",
-            enable: true,
-            outMode: "bounce",
-            random: false,
-            speed: 5,
-            straight: false
-            },
-            number: {
-            density: {
-                enable: true,
-                value_area: 800
-            },
-            value: 30
-            },
-            opacity: {
-            value: 0.5
-            },
-            shape: {
-            type: "circle"
-            },
-            size: {
-            random: true,
-            value: 5
-            }
-        },
-        detectRetina: true
         });
     </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'91b471ae0fff12ea',t:'MTc0MTEyMzUwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
