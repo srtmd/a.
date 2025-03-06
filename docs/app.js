@@ -99,14 +99,14 @@ function play_pause(){
 function play(){
     isPlaying= true;
     currentTrack.play();
-    playPause.classList.remove("bi-play-circle");
-    playPause.classList.add("bi-pause-circle");
+    playPause.classList.remove("bi-play-fill");
+    playPause.classList.add("bi-pause-fill");
 };
 function pause(){
     isPlaying= false;
     currentTrack.pause();
-    playPause.classList.remove("bi-pause-circle");
-    playPause.classList.add("bi-play-circle");
+    playPause.classList.remove("bi-pause-fill");
+    playPause.classList.add("bi-play-fill");
 };
 function fulltime(){
     const mins=String(Math.floor((currentTrack.duration)/60)).padStart(2,"0");
@@ -131,7 +131,7 @@ function fulltime(){
     };
 };
 function volume(){
-    currentTrack.volume=vol.value/11;
+    currentTrack.volume=vol.value/110;
 };
 function seek(){
     currentTrack.currentTime=trackRange.value;

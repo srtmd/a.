@@ -160,14 +160,29 @@
 
         .function i {
             color: var(--text-color);
-            font-size: 2rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            position: relative;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .function i.grande {
+            color: var(--text-color);
+            font-size: 3rem;
+            cursor: pointer;
+            position: relative;
+            top: -10px;
             transition: color 0.3s ease, transform 0.2s ease;
         }
 
         .function i:hover {
             color: var(--accent-color);
             transform: scale(1.1);
+        }
+
+        .function i.grande:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
         }
 
         #volume {
@@ -180,7 +195,7 @@
 
         #volume i {
             color: var(--text-color);
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         #links {
@@ -189,7 +204,7 @@
 
         #links a {
             color: var(--secondary-text);
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             text-decoration: none;
             margin: 0 8px;
             transition: color 0.3s ease;
@@ -226,18 +241,18 @@
         </div>
         <div id="music_functions">
             <div class="function">
-                <i id="prev" onclick="prev()" class="bi bi-skip-backward-circle"></i>
+                <i id="prev" onclick="prev()" class="bi bi-skip-backward-fill"></i>
             </div>
             <div class="function">
-                <i id="play_pause" onclick="play_pause()" class="bi bi-play-circle"></i>
+                <i id="play_pause" onclick="play_pause()" class="bi bi-play-fill grande"></i>
             </div>
             <div class="function">
-                <i id="next" onclick="next()" class="bi bi-skip-forward-circle"></i>
+                <i id="next" onclick="next()" class="bi bi-skip-forward-fill"></i>
             </div>
         </div>
         <div id="volume">
             <i class="bi bi-volume-down"></i>
-            <input type="range" name="volume" onchange="volume()" class="slider" value="3" id="vol" min="0" max="10">
+            <input type="range" name="volume" onchange="volume()" class="slider" value="5" id="vol" min="0" max="80">
             <i class="bi bi-volume-up"></i>
         </div>
         <div id="links">
